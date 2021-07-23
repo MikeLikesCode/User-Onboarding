@@ -24,7 +24,7 @@ export default function Form (props){
     return(
        <form onSubmit={onSubmit}>
            <h2> Add a user to the system!</h2>
-           <button disabled={disabled}>Submit</button>
+           <button id="submitBtn" disabled={disabled}>Submit</button>
 
         <div>
           <div>{errors.name}</div>

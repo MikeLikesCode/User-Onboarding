@@ -23,7 +23,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   const postNewUser = (newUser) => {
     axios
@@ -43,11 +43,11 @@ function App() {
       .reach(FormSchema, name)
       .validate(value)
       .then(() => setFormErrors({ ...formErrors, [name]: "" }))
-      .catch((err) => console.log(err));
+      .catch(err => setFormErrors({ ...formErrors, [name]: err.errors}))
   };
 
   const inputChange = (name, value) => {
-    validate();
+    validate(name,value);
     setFormValues({
       ...formValues,
       [name]: value,
@@ -71,6 +71,7 @@ function App() {
 
   return (
     <div>
+
       <Form
         values={formValues}
         change={inputChange}
